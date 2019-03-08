@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>showModalDialog polyfill demo</title>
+      <link rel="stylesheet" href="css/showModalDialog.css"/>
+    </head>
+    <body>
+      <h1>showModalDialog polyfill demo</h1>
+      <form action="">
+        <p>
+          <input id="button2" type="button" value="Show Modal Dialog using async/await"> <span id="result2"></span>
+        </p>
+        <p>
+          <input id="button3" type="button" value="Show Modal Dialog using eval"> <span id="result3"></span>
+        </p>
+      </form>
+      <script src="js/showModalDialog-poly.js"></script>
+      <script src="js/jquery-3.3.1.js"></script>
+      <script>
+        //using async/await
+        document.getElementById('button2').addEventListener('click', async function() {
+          var ret = await window.showModalDialog("modal-poly.html", "some argument", "dialogWidth:500px;dialogHeight:200px");
+          document.getElementById('result2').innerText = "Returned from modal: " + ret;
+        });
+        //using eval
+        document.getElementById('button3').addEventListener('click', function() {
+          var ret = window.showModalDialog("modal-poly.html", "some argument", "dialogWidth:500px;dialogHeight:200px");
+          document.getElementById('result3').innerText = "Returned from modal: " + ret;
+        });
+      </script>
+    </body>
+</html>
