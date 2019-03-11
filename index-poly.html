@@ -8,7 +8,7 @@
       <h1>showModalDialog polyfill demo</h1>
       <form action="">
         <p>
-          <input id="button2" type="button" value="Show Modal Dialog using async/await"> <span id="result2"></span>
+          <input id="show-modal-button" type="button" value="Show Modal Dialog using async/await"> <span id="result2"></span>
         </p>
         <p>
           <input id="button3" type="button" value="Show Modal Dialog using eval"> <span id="result3"></span>
@@ -18,14 +18,9 @@
       <script src="js/jquery-3.3.1.js"></script>
       <script>
         //using async/await
-        document.getElementById('button2').addEventListener('click', async function() {
+        $('#show-modal-button').on('click', async function() {
           var ret = await window.showModalDialog("modal-poly.html", "some argument", "dialogWidth:500px;dialogHeight:200px");
-          document.getElementById('result2').innerText = "Returned from modal: " + ret;
-        });
-        //using eval
-        document.getElementById('button3').addEventListener('click', function() {
-          var ret = window.showModalDialog("modal-poly.html", "some argument", "dialogWidth:500px;dialogHeight:200px");
-          document.getElementById('result3').innerText = "Returned from modal: " + ret;
+          $('#result2').text("Returned from modal: " + ret);
         });
       </script>
     </body>
