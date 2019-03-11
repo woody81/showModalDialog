@@ -8,7 +8,7 @@
       <h1>showModalDialog polyfill demo</h1>
       <form action="">
         <p>
-          <input id="show-modal-button" type="button" value="Show Modal Dialog using async/await"> <span id="result2"></span>
+          <input id="show-modal-button" type="button" value="Show Modal Dialog using async/await"> <span id="result"></span>
         </p>
       </form>
       <script src="js/showModalDialog-poly.js"></script>
@@ -17,7 +17,7 @@
         //using async/await
         $('#show-modal-button').on('click', async function() {
           var ret = await window.showModalDialog("modal-poly.html", "some argument", "dialogWidth:500px;dialogHeight:200px");
-          $('#result2').text("Returned from modal: " + ret);
+          $('#result').text("Returned from modal: " + ret);
         });
       </script>
     </body>
