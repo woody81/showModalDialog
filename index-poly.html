@@ -6,18 +6,39 @@
     </head>
     <body>
       <h1>showModalDialog polyfill demo</h1>
-      <form action="">
+      <form action="#">
         <p>
           <input id="show-modal-button" type="button" value="Show Modal Dialog using async/await"> <span id="result"></span>
         </p>
+        <p>
+          <input id="show-modal-button-2" type="button" value="Show Modal Dialog using eval"> <span id="result2"></span>
+        </p>
+        <p>
+          <input id="show-modal-button-3" type="button" value="Show Modal Dialog using yield"> <span id="result3"></span>
+        </p>
       </form>
       <script src="js/showModalDialog-poly.js"></script>
-      <script src="js/jquery-3.3.1.js"></script>
+      <script src="js/jquery-1.12.4.js"></script>
+      <script src="js/jquery-ui.js"></script>
       <script>
+        //using yield
+        document.getElementById('show-modal-button-3').addEventListener('click', function() {
+          spawn(function*() {
+            var ret = yield window.showModalDialog("modal-poly.html", "some argument", "dialogWidth:500px;dialogHeight:200px");
+            document.getElementById('result3').innerText = "Returned from modal: " + ret;
+          });
+        });
+
         //using async/await
         $('#show-modal-button').on('click', async function() {
           var ret = await window.showModalDialog("modal-poly.html", "some argument", "dialogWidth:500px;dialogHeight:200px");
           $('#result').text("Returned from modal: " + ret);
+        });
+
+        //using eval
+        $('#show-modal-button-2').on('click', function() {
+          var ret = showModalDialog2("modal-poly.html", "some argument", "dialogWidth:500px;dialogHeight:200px");
+          $('#result2').text("Returned from modal: " + ret);
         });
       </script>
     </body>
