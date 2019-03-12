@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>showDialog demo - IE9 compatible</title>
+  <link rel="stylesheet" href="css/showModalDialog.css"/>
+</head>
+<body>
+<h1>showDialog demo - IE9 compatible</h1>
+<form action="#">
+  <p>
+    <input id="show-modal-button" type="button" value="Show Modal Dialog using async"> <span id="result"></span>
+  </p>
+</form>
+<script src="js/showModalDialog.js"></script>
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script>
+  //using async/await
+  $('#show-modal-button').on('click', async function() {
+    var ret = await window.showModalDialog("modal.html", "some argument", "dialogWidth:500px;dialogHeight:200px");
+  // $('#show-modal-button').on('click', function() {
+  //   var ret = window.showModalDialog("modal-async.html", "some argument", "dialogWidth:500px;dialogHeight:200px");
+    $('#result').text("Returned from modal: " + ret);
+  });
+</script>
+</body>
+</html>
