@@ -26,28 +26,19 @@ function showDialog(url, arg, opt) {
             content.css({ display: 'block' });
         });
 
-        $('<input>').appendTo(content).attr({
-            "type": "button",
-            "id": "dialog-close",
-            "onclick": "_done(form);",
-            "value": "close"});
-
-        $('#dialog-close').on('click',function(e) {
-            e.preventDefault();
-        });
-
-        //if using eval
         var isNext = false;
         var nextStmts = caller.split('\n').filter(function(stmt) {
             if(isNext || stmt.indexOf('showDialog(') >= 0)
                 return isNext = true;
             return false;
         });
-        $('#dialog-close').on('click', function () {
+        $('#modal-iframe').on('load', function () {
+          $('#modal-iframe').contents().find("#close-link").on('click', function () {
             var returnValue = document.getElementById('modal-iframe').contentWindow.returnValue;
             close();
             nextStmts[0] = nextStmts[0].replace(/(window\.)?showDialog\(.*\)/g, JSON.stringify(returnValue));
             eval('{\n' + nextStmts.join('\n'));
+          });
         });
         throw 'Execution stopped until showModalDialog is closed';
     };
